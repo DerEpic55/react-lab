@@ -8,14 +8,15 @@
 
 */
 
-import Gallery, { Profile } from "./Gallery";
-
+import Gallery from "./Gallery";
+import { Profile } from "./Profile";
 // Move me to Profile.js!
 
 export default function App() {
   return (
     <div>
-      <Profile />      
+      <Profile />  
+      <Gallery />     
     </div>
   );
 }
