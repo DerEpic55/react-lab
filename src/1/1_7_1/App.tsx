@@ -17,7 +17,7 @@ export type Person = {
 }
 
 export default function List() {
-    const listItems = people.map((person) => (
+    const listItemsChemists = people.filter(person => (person.profession === 'chemist')).map((person) => (
         <li key={person.id}>
             <img
                 src={getImageUrl(person)}
@@ -30,9 +30,25 @@ export default function List() {
             </p>
         </li>
     ));
+
+    const listItems = people.filter(person => (person.profession !== 'chemist')).map((person) => (
+        <li key={person.id}>
+            <img
+                src={getImageUrl(person)}
+                alt={person.name}
+            />
+            <p>
+                <b>{person.name}:</b>
+                {' ' + person.profession + ' '}
+                known for {person.accomplishment}
+            </p>
+        </li>
+    ));
+    
     return (
         <article>
             <h1>Scientists</h1>
+            <ul>{listItemsChemists}</ul>
             <ul>{listItems}</ul>
         </article>
     );
