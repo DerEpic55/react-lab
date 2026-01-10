@@ -3,6 +3,7 @@
     Заполните логику handleIncreaseClick так, чтобы нажатие "+" увеличивало соответствующее число.
 */
 
+
 import { useState } from 'react';
 
 const initialProducts = [
@@ -28,7 +29,18 @@ export default function ShoppingCart() {
         initialProducts
     );
 
-    function handleIncreaseClick(productId: number) { }
+    function handleIncreaseClick(productId: number) { 
+        setProducts(
+            products.map((product) => {
+            if(product.id === productId){
+                return {
+                    ...product,
+                    count: product.count + 1
+                };
+            }
+            return product;
+        }));
+    }
 
     return (
         <ul>
