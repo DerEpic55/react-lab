@@ -7,12 +7,14 @@
   Есть ли разница в том, поместить ли alert до или после вызова setWalk?
 */
 
+
 import { useState } from 'react';
 
 export default function TrafficLight() {
     const [walk, setWalk] = useState(true);
 
     function handleClick() {
+        alert(walk ?'Следующая остановка' : 'Следующим будет идти');
         setWalk(!walk)
     }
 
