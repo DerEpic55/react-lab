@@ -26,9 +26,10 @@ const poem = {
 export default function Poem() {
   return (
       <article>
-          {poem.lines.map((line, index) => (
-              <p key={index}>{line}</p>
-          ))}
+          {poem.lines.map((line, index) => [
+              <p key={index}>{line}</p>,
+              index + 1 < poem.lines.length && <hr/>
+          ])}
       </article>
   );
 }
