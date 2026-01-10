@@ -19,9 +19,11 @@ export default function FilterableList() {
   }
   return (
     <>
+
       <SearchBar query={query} handleChange={handleChange} />
       <hr />
       <List  items={results} />
+      
     </>
   );
 }
