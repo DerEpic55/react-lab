@@ -13,7 +13,7 @@ function ColorSwitch({
   onChangeColor: () => void
 }) {
   return (
-    <button>
+    <button onClick={(e) => { e.stopPropagation(); onChangeColor(); }}>
       Change color
     </button>
   );
