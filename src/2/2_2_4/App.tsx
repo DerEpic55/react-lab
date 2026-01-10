@@ -7,13 +7,9 @@
   Можете ли вы объяснить, почему эта переменная состояния была ненужной?
 */
 
-import { useState } from 'react';
-
 export default function FeedbackForm() {
-    const [name, setName] = useState('');
-
     function handleClick() {
-        setName(prompt('What is your name?')??"");
+        const name = (prompt('What is your name?')??"");
         alert(`Hello, ${name}!`);
     }
 
