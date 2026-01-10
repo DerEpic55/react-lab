@@ -10,21 +10,49 @@
 */
 
 
+
+import { useState } from "react";
+
 export default function EditProfile() {
-    return (
-        <form>
-            <label>
-                First name: <b>Jane</b>
-                <input />
-            </label>
-            <label>
-                Last name: <b>Jacobs</b>
-                <input />
-            </label>
-            <button type="submit">Edit Profile</button>
-            <p>
-                <i>Hello, Jane Jacobs!</i>
-            </p>
-        </form>
-    );
+  const [isEdit, SetIsEdit] = useState(false);
+  const [firstName, SetFirstName] = useState("Jane");
+  const [lastName, SetLastName] = useState("Jacobs");
+
+  const handleEdit = (e : any) => {
+    e.preventDefault();
+    SetIsEdit(!isEdit);
+  };
+
+  return (
+    <form onSubmit={handleEdit}>
+      <label>
+        First name:
+        {isEdit ? (
+          <input
+            value={firstName}
+            onChange={(e) => SetFirstName(e.target.value)}
+          />
+        ) : (
+          <b>{firstName}</b>
+        )}
+      </label>
+      <label>
+        Last name:
+        {isEdit ? (
+          <input
+            value={lastName}
+            onChange={(e) => SetLastName(e.target.value)}
+          />
+        ) : (
+          <b>{lastName}</b>
+        )}
+      </label>
+      <button type="submit">{isEdit ? "Save" : "Edit"} Profile</button>
+      <p>
+        <i>
+          Hello, {firstName} {lastName}!
+        </i>
+      </p>
+    </form>
+  );
 }
