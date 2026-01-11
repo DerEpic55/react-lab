@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Action } from './messengerReducer';
 import { Contact } from './App';
 
