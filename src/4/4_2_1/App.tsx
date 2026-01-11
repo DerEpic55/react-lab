@@ -5,14 +5,22 @@
   Для решения дополнительной задачи синхронизируйте кнопку "Play" с тем, воспроизводится ли видео, даже если пользователь щелкает правой кнопкой мыши на видео и воспроизводит его с помощью встроенных элементов управления мультимедиа браузера. Для этого вам может понадобиться прослушать onPlay и onPause на видео.
 */
 
+
 import { useState, useRef } from 'react';
 
 export default function VideoPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
+  const ref = useRef(null);
 
   function handleClick() {
     const nextIsPlaying = !isPlaying;
     setIsPlaying(nextIsPlaying);
+  
+    if(nextIsPlaying){
+      ref.current.play();
+    }else{
+      ref.current.pause();
+    }
   }
 
   return (
@@ -20,7 +28,11 @@ export default function VideoPlayer() {
       <button onClick={handleClick}>
         {isPlaying ? 'Pause' : 'Play'}
       </button>
-      <video width="250">
+      <video 
+        ref={ref} 
+        width="250"
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}>
         <source
           src="flower.mp4"
           type="video/mp4"
