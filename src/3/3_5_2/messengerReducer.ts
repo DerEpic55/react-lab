@@ -12,7 +12,7 @@ export type Action = {
 } | {
     type: 'sent_message';
     message: string;
-};;
+};
 
 export const initialState = {
     selectedId: 0,
@@ -35,6 +35,12 @@ export function messengerReducer(
             return {
                 ...state,
                 message: action.message,
+            };
+        }
+        case 'sent_message':{
+            return{
+                ...state,
+                message: action.message
             };
         }
         default: {
