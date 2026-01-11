@@ -12,7 +12,10 @@ export default function MyInput(
     const ref = useRef(null);
 
     // TODO: This doesn't quite work. Fix it.
-    // ref.current.focus()    
+    // ref.current.focus() 
+    useEffect(() => {
+        ref.current.focus();
+    }, []);   
 
     return (
         <input
