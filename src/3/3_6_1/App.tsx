@@ -7,15 +7,16 @@
   Вы можете объявить контекст в файле Context.js.
 */
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { places, PlaceType } from './data';
 import { getImageUrl } from './utils';
+import { ImageSizeContext } from './Context.ts'
 
 export default function App() {
   const [isLarge, setIsLarge] = useState(false);
   const imageSize = isLarge ? 150 : 100;
   return (
-    <>
+    <ImageSizeContext.Provider value={imageSize}>
       <label>
         <input
           type="checkbox"
@@ -27,17 +28,16 @@ export default function App() {
         Use large images
       </label>
       <hr />
-      <List imageSize={imageSize} />
-    </>
+      <List/>
+    </ImageSizeContext.Provider>
   )
 }
 
-function List({ imageSize }: { imageSize: number }) {
+function List() {
   const listItems = places.map(place =>
     <li key={place.id}>
       <Place
         place={place}
-        imageSize={imageSize}
       />
     </li>
   );
@@ -45,15 +45,12 @@ function List({ imageSize }: { imageSize: number }) {
 }
 
 function Place(
-  { place, imageSize }: 
-  { place: PlaceType, imageSize: number }
+  { place }: 
+  { place: PlaceType }
 ) {
   return (
     <>
-      <PlaceImage
-        place={place}
-        imageSize={imageSize}
-      />
+      <PlaceImage place={place}/>
       <p>
         <b>{place.name}</b>
         {': ' + place.description}
@@ -63,9 +60,10 @@ function Place(
 }
 
 function PlaceImage(
-  { place, imageSize }:
-    { place: PlaceType, imageSize: number }
+  { place }:
+    { place: PlaceType }
 ) {
+  const imageSize = useContext(ImageSizeContext);
   return (
     <img
       src={getImageUrl(place)}
