@@ -7,6 +7,7 @@
   Почему так происходит? Исправьте ошибку внутри этого Эффекта.
 */
 
+
 import { useState, useEffect } from 'react';
 import { fetchBio } from './api.ts';
 
@@ -15,10 +16,18 @@ export default function Page() {
   const [bio, setBio] = useState<string | null> (null);
 
   useEffect(() => {
+    let ignore = false;
+
     setBio(null);
     fetchBio(person).then(result => {
-      setBio(result);
+      if(!ignore){
+        setBio(result);
+      }
     });
+
+    return () => {
+      ignore = true;
+    }
   }, [person]);
 
   return (
@@ -35,3 +44,4 @@ export default function Page() {
     </>
   );
 }
+
